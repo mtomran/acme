@@ -1,0 +1,13 @@
+{
+    "name": "acme_server",
+    "version": "1.0.0",
+    "description": "ACME REST API Server",
+    "author": "Masoud Omran <mtomran@gmail.com>",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js"
+    },
+    "dependencies": {
+      "express": "^4.16.3"
+    }
+  }

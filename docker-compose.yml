@@ -1,0 +1,21 @@
+version: '3'
+services:
+  server:
+    build: ./server
+    restart: unless-stopped
+  
+  db:
+    build: ./db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: secret
+    restart: unless-stopped
+  
+  www:
+    build: ./www
+    restart: unless-stopped
+  
+  proxy:
+    build: ./proxy
+    restart: unless-stopped
+    
