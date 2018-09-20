@@ -10,8 +10,6 @@ const morgan= require("morgan");
 
 const MongoClient = require("mongodb").MongoClient;
 
-
-
 const PORT = 8000;
 const HOST = "0.0.0.0";
 const NAME = "ACME REST Server";
@@ -22,18 +20,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(morgan("combined"));
 
-app.get("/", (req, res) => {
-	res.send("Welcome to "+ NAME);
+app.get("/api/v1", (req, res) => {
+	res.json({ message: "Welcome to "+ NAME });
 });
 
 app.use("/api/v1", require("./routes"));
 
 // Use connect method to connect to the server
-MongoClient.connect("mongodb://db:27017/acme", function (err, database) {
+MongoClient.connect("mongodb://root:secret@db:27017", function (err, client) {
 	if(err) throw new Error(err);
 
 	console.log("Connected to DB successfully");	
-	global.db = database;
+	global.db = client.db("acme");
 
 	// running server after DB connection
 	console.log(`Running ${NAME} on http://${HOST}:${PORT}`);
