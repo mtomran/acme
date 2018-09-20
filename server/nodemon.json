@@ -1,0 +1,16 @@
+{ 
+    "ignore": [    
+    ],
+    "legacy-watch": true,
+    "verbose": true,
+    "events": {
+      "restart": "echo 'run commands here!'"
+    }, 
+    "watch": [    
+      "/usr/src/app/"
+    ],
+    "env": {
+      "NODE_PATH": "."
+    }, 
+      "ext": "js json"
+  }

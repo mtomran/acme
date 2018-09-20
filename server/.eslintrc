@@ -50,7 +50,8 @@
     },
     "extends": "eslint:recommended",
     "globals":{
-        "utils": false
+        "utils": false,
+        "db": false
     },
     "plugins": [
     ]

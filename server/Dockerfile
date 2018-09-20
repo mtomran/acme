@@ -1,5 +1,7 @@
 FROM node:8.12.0
 
+RUN npm install -g nodemon
+
 WORKDIR /usr/src/app
 
 COPY package*.json ./
