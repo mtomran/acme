@@ -19,6 +19,9 @@ export class DevicesComponent implements OnInit {
 
   ngOnInit() {
     this.getDevices();
+    setTimeout(()=>{
+      this.devices[0].title= "test";
+    }, 3000)
   }
 
 }

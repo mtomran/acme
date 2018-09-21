@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatButtonModule, MatListModule } from '@angular/material';
 import { DevicesComponent } from './devices/devices.component';
 
 @NgModule({
@@ -12,7 +14,9 @@ import { DevicesComponent } from './devices/devices.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    BrowserAnimationsModule,
+    HttpClientModule,
+    MatButtonModule, MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

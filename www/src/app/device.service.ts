@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Device } from "./device";
+import { Device, DeviceResponse } from "./device";
 import { Observable, of } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, tap } from 'rxjs/operators';
@@ -7,15 +7,13 @@ import { map, tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
+
 export class DeviceService {  
   private deviceUrl = 'server/device';
 
   constructor(private http: HttpClient) { }
-
-  
-
   getDevices(): Observable<Device[]> {   
-    return this.http.get(this.deviceUrl)
+    return this.http.get<DeviceResponse>(this.deviceUrl)
     .pipe(map(res=>{
       return res.response.map(item => {        
         const device: Device = {

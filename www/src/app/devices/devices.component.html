@@ -1,6 +1,7 @@
 <h2>Devices</h2>
-<ul class="devices">
-  <li *ngFor="let device of devices">
-    <span class="badge">{{device.id}}</span> {{device.title}}
-  </li>
-</ul>
+
+<mat-list dense>
+  <mat-list-item *ngFor="let device of devices"> 
+    {{device.id}} {{device.title}} {{device.type}} {{device.sensors | json}}
+  </mat-list-item>
+ </mat-list>
