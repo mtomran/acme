@@ -1,0 +1,17 @@
+{
+    "name": "acme_www",
+    "version": "1.0.0",
+    "description": "ACME WWW Server",
+    "author": "Masoud Omran <mtomran@gmail.com>",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app.js",
+      "test": "mocha"
+    },
+    "dependencies": {
+      "express": "^4.16.3"
+    },
+    "devDependencies": {
+      "mocha": "^5.2.0"
+    }
+  }
