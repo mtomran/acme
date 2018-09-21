@@ -1,7 +1,7 @@
 <h2>Devices</h2>
 
 <mat-list dense>
-  <mat-list-item *ngFor="let device of devices"> 
-    {{device.id}} {{device.title}} {{device.type}} {{device.sensors | json}}
+  <mat-list-item *ngFor="let device of devicesById | keyvalue"> 
+    {{device.value.id}} {{device.value.title}} {{device.value.type}} {{device.value.sensors | json}}
   </mat-list-item>
  </mat-list>

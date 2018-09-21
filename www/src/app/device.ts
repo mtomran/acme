@@ -1,20 +1,22 @@
-
+// structure of device array in get http request
 export interface DeviceData {
-    _id: string;
-    title: string;
-    type: string;
-    sensors: object;
-  }
-  
-export  interface DeviceResponse {
-    response: Array<DeviceData>;
-    message: string;
-    error: string;
-  }
+  _id: string;
+  title: string;
+  type: string;
+  sensors: object;
+}
 
-export class Device {
-    id: string;
-    title: string;
-    type: string;
-    sensors: object;
+// response structure of a get http request
+export interface DeviceResponse {
+  response: Array<DeviceData>;
+  message: string;
+  error: string;
+}
+
+// device structure used in the component
+export interface Device {
+  id: string;
+  title: string;
+  type: string;
+  sensors: object;
 }
