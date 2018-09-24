@@ -19,7 +19,7 @@ import { SimulatorComponent } from './simulator/simulator.component';
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatButtonModule, MatListModule, MatFormFieldModule, MatSelectModule, MatInputModule
+    MatButtonModule, MatListModule, MatFormFieldModule, MatSelectModule, MatInputModule,
     AppRoutingModule
   ],
   providers: [],
