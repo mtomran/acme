@@ -4,19 +4,23 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatListModule, MatFormFieldModule, MatSelectModule, MatInputModule } from '@angular/material';
 import { DevicesComponent } from './devices/devices.component';
+import { AppRoutingModule } from './app-routing.module';
+import { SimulatorComponent } from './simulator/simulator.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    DevicesComponent
+    DevicesComponent,
+    SimulatorComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatButtonModule, MatListModule
+    MatButtonModule, MatListModule, MatFormFieldModule, MatSelectModule, MatInputModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

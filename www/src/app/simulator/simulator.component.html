@@ -1,0 +1,32 @@
+<h2>
+  Device Manipulation Simulator
+</h2>
+
+<div class="simulator-add-container">
+  <mat-form-field>
+    <input matInput placeholder="device name">
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="select device type">
+        <mat-option value="car">car</mat-option>
+        <mat-option value="stove">stove</mat-option>
+        <mat-option value="fridge">fridge</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="sensors">
+  </mat-form-field>
+
+  <button mat-button>Add Device</button>
+</div>
+<div>
+    <button mat-button>Update Sensors</button>
+</div>
+
+
+
+<div class="device-list">
+  <app-devices></app-devices>
+</div>

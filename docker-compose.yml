@@ -6,6 +6,8 @@ services:
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
+    depends_on: 
+      - db
     restart: unless-stopped
   
   db:
@@ -26,5 +28,8 @@ services:
     build: ./proxy
     ports: 
       - "80:80"
+    depends_on: 
+      - www
+      - server  
     restart: unless-stopped
     

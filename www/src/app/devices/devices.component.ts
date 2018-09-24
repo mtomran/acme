@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Device } from "../device";
 import { DeviceService } from "../device.service";
 import { SocketService } from "../socket.service";
-import { Socket } from "../socket";
 
 @Component({
   selector: 'app-devices',
@@ -66,7 +65,12 @@ export class DevicesComponent implements OnInit {
     this.socketService.onEvent("delete:/device")
     .subscribe(data => {
       console.log("Socket: delete device", data);
-      delete this.devicesById[data._id];
+      
+      if(data._id){// delete one item if ID is provided
+        delete this.devicesById[data._id];        
+      }else{// delete all items if ID is not provided
+        this.devicesById= {};
+      }      
     })
   }
 }
