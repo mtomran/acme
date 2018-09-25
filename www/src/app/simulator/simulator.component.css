@@ -1,11 +1,15 @@
-.simulator-add-container { 
-    width: 20%;
+
+
+.simulator-left-panel { 
+    position: absolute;
+    width: 250px;
     display: flex;
     flex-direction: column;
 }
 
 .device-list {
-    position: absolute;
-    left: 25%;
-    top: 10%;
+    position: relative;
+    left: 300px;
+    
 }
+

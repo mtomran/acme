@@ -1,32 +1,44 @@
-<h2>
-  Device Manipulation Simulator
-</h2>
+<div class="device-simulator-container">
+  <h2>
+    Device Simulator
+  </h2>
 
-<div class="simulator-add-container">
-  <mat-form-field>
-    <input matInput placeholder="device name">
-  </mat-form-field>
+  <div  class="simulator-left-panel">
+    <div>
+      <mat-form-field>
+        <input matInput placeholder="device name" [(ngModel)]="deviceTitle">
+      </mat-form-field>
 
-  <mat-form-field>
-    <mat-select placeholder="select device type">
-        <mat-option value="car">car</mat-option>
-        <mat-option value="stove">stove</mat-option>
-        <mat-option value="fridge">fridge</mat-option>
-    </mat-select>
-  </mat-form-field>
+      <mat-form-field>
+        <mat-select placeholder="select device type" [(ngModel)]="deviceType">
+            <mat-option value="car">car</mat-option>
+            <mat-option value="stove">stove</mat-option>
+            <mat-option value="fridge">fridge</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="sensors">
-  </mat-form-field>
+      <mat-form-field>
+        <mat-chip-list #chipList>
+          <mat-chip *ngFor="let sensor of sensors | keyvalue" [selectable]="selectable"
+                    [removable]="removable" (removed)="removeSensor(sensor.key)">
+            {{sensor.key}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New sensor..."
+                  [matChipInputFor]="chipList"
+                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                  [matChipInputAddOnBlur]="addOnBlur"
+                  (matChipInputTokenEnd)="addSensor($event)">
+        </mat-chip-list>
+      </mat-form-field>
 
-  <button mat-button>Add Device</button>
-</div>
-<div>
-    <button mat-button>Update Sensors</button>
-</div>
-
-
-
-<div class="device-list">
-  <app-devices></app-devices>
+      <button mat-button (click)="addDeviceClick()">Add Device</button>
+    </div>
+    <div>
+        <button mat-button>Update Sensors</button>
+    </div>
+  </div> <!--> left panel <-->
+  <div class="device-list">
+    <app-devices></app-devices>
+  </div>
 </div>
