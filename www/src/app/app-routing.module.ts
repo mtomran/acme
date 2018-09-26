@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DevicesComponent }      from './devices/devices.component';
-import { SimulatorComponent }      from './simulator/simulator.component';
+import { DevicesComponent } from './devices/devices.component';
+import { SimulatorComponent } from './simulator/simulator.component';
 
 const routes: Routes = [
   { path: 'devices', component: DevicesComponent },

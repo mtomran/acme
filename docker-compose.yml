@@ -20,8 +20,7 @@ services:
   www:
     build: ./www
     volumes:
-      - ./www:/usr/src/app
-      - /usr/src/app/node_modules
+      - ./www:/usr/src/app     
     restart: unless-stopped
   
   proxy:

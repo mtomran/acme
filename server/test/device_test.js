@@ -51,8 +51,8 @@ describe("POST: /device", function() {
 			expect(res.body.error).to.equal(null);
 			expect(res.body.message).to.have.string("add");
 			expect(res.body.message).to.have.string("successful");
-			expect(res.body.response).to.have.all.keys("deviceId");
-			deviceId= res.body.response.deviceId;
+			expect(res.body.response).to.have.all.keys("id");
+			deviceId= res.body.response.id;
 			console.log("test:", res.body);
 		}); 
 	});
@@ -88,8 +88,8 @@ describe("POST: /device", function() {
 			expect(res.body.error).to.equal(null);
 			expect(res.body.message).to.have.string("add");
 			expect(res.body.message).to.have.string("successful");
-			expect(res.body.response).to.have.all.keys("deviceId");
-			deviceId= res.body.response.deviceId;
+			expect(res.body.response).to.have.all.keys("id");
+			deviceId= res.body.response.id;
 			console.log("test:", res.body);
 		}); 
 	});

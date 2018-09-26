@@ -32,12 +32,23 @@
         </mat-chip-list>
       </mat-form-field>
 
-      <button mat-button (click)="addDeviceClick()">Add Device</button>
+      <button mat-button *ngIf="!deviceId" (click)="addDeviceClick()">Add Device</button>
+      <div *ngIf="deviceId">
+        <button mat-button (click)="updateDeviceClick()">Update Device</button>
+        <button mat-button (click)="deleteDeviceClick()">Delete Device</button>  
+      </div>
+
+      <mat-form-field>
+        <mat-select placeholder="select device" [(ngModel)]="deviceId" (ngModelChange)="deviceSelectChange()" >
+            <mat-option *ngFor="let device of Devices | keyvalue" value="{{device.value.id}}">{{device.value.title}}</mat-option>            
+        </mat-select>
+      </mat-form-field>
+
+      <button mat-button (click)="resetDeviceClick()">Reset</button>
+           
     </div>
-    <div>
-        <button mat-button>Update Sensors</button>
-    </div>
-  </div> <!--> left panel <-->
+    
+  </div> <!-- left panel -->
   <div class="device-list">
     <app-devices></app-devices>
   </div>

@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as io from 'socket.io-client';
@@ -6,17 +7,18 @@ import * as io from 'socket.io-client';
   providedIn: 'root'
 })
 export class SocketService {
+  // @ts-ignore : module exists
   private socket: SocketIOClient.Socket;
 
   constructor() {
     this.socket = io.connect();
-    this.socket.on("connect", ()=>{
-        console.log("Socket: Connected");
+    this.socket.on('connect', () => {
+        console.log('Socket: Connected');
     });
-    
-    this.socket.on("disconnect", ()=>{
-        console.log("Socket: Disconnected");
-    });    
+
+    this.socket.on('disconnect', () => {
+        console.log('Socket: Disconnected');
+    });
   }
 
   // HANDLER

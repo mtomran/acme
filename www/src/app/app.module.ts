@@ -4,7 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatListModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatChipsModule, MatIconModule } from '@angular/material';
+import { MatButtonModule,
+  MatListModule,
+  MatFormFieldModule,
+  MatSelectModule,
+  MatInputModule,
+  MatChipsModule,
+  MatIconModule
+} from '@angular/material';
 import { DevicesComponent } from './devices/devices.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SimulatorComponent } from './simulator/simulator.component';

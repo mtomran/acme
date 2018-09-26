@@ -1,14 +1,13 @@
-// structure of device array in get http request
-export interface DeviceData {
-  _id: string;
-  title: string;
-  type: string;
-  sensors: Sensor;
+// response structure of a get http request
+export interface DeviceGetResponse {
+  response: Array<Device>;
+  message: string;
+  error: string;
 }
 
-// response structure of a get http request
+// response structure of http requests other than get
 export interface DeviceResponse {
-  response: Array<DeviceData>;
+  response: any;
   message: string;
   error: string;
 }
@@ -19,6 +18,10 @@ export interface Device {
   title: string;
   type: string;
   sensors: Sensor;
+}
+
+export interface DeviceMap {
+  [key: string]: Device;
 }
 
 export interface Sensor {

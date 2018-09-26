@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Device } from "../device";
-import { DeviceService } from "../device.service";
-import { SocketService } from "../socket.service";
+import { Device, DeviceMap } from '../device';
+import { DeviceService } from '../device.service';
 
 @Component({
   selector: 'app-devices',
@@ -10,67 +9,19 @@ import { SocketService } from "../socket.service";
 })
 export class DevicesComponent implements OnInit {
   // device inforamtion is stored in an object map for quicker reference
-  devicesById: {[key: string]:Device}= {};
+  constructor(private deviceService: DeviceService) { }
 
-  constructor(private deviceService: DeviceService, private socketService: SocketService) { }
+  devicesById;
 
-  /**
-   * gets devices using the http service
-   */
-  getDevices(): void {
-    this.deviceService.getDevices()
-    .subscribe(devices => {      
-      for(let device of devices){
-        this.devicesById[device.id]= device;
-      }      
-    });    
+  get Devices(): DeviceMap {
+    return this.deviceService.Devices;
   }
 
   ngOnInit() {
     // gets initial list of devices
-    this.getDevices();
-    
+    this.deviceService.loadDevices();
+
     // intialize sockets to update device list upon events
-    this.initSockets()
-  }
-
-  /**
-   * intialize sockets to update device list upon events
-   */
-  initSockets(){
-    // socket event for adding a new device
-    this.socketService.onEvent("post:/device")
-    .subscribe(data => {
-      console.log("Socket: post device", data);
-      const device: Device = {
-          id: data._id,
-          title: data.title,
-          type: data.type,
-          sensors: data.sensors
-      }
-      
-      this.devicesById[device.id]= device;
-    })
-
-    // socket event for updating an existing device
-    this.socketService.onEvent("put:/device")
-    .subscribe(data => {
-      console.log("Socket: put device", data);
-      const device= this.devicesById[data._id];
-      device.title= data.title || device.title;
-      device.sensors= data.sensors || device.sensors;
-    })
-
-    // socket event for deleting an exiting device
-    this.socketService.onEvent("delete:/device")
-    .subscribe(data => {
-      console.log("Socket: delete device", data);
-      
-      if(data._id){// delete one item if ID is provided
-        delete this.devicesById[data._id];        
-      }else{// delete all items if ID is not provided
-        this.devicesById= {};
-      }      
-    })
+    this.deviceService.initSockets();
   }
 }

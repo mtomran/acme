@@ -11,4 +11,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 8000
-CMD [ "npm", "start" ]
+CMD [ "npm", "start" ]sudo grep /etc/shadow /etc/audit/audit.rules
