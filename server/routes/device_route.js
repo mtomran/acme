@@ -11,6 +11,8 @@ router.put("/device", putDevice, socketHandler(), utils.responseHandler);
 
 router.delete("/device/:id", deleteDevice, socketHandler(), utils.responseHandler);
 
+router.delete("/device", deleteAllDevices, socketHandler(), utils.responseHandler);
+
 const ObjectID = require("mongodb").ObjectID;
 
 /**
@@ -87,19 +89,24 @@ function putDevice(req, res, next) {
  * @param {Object} next calls next available middleware
  */
 function deleteDevice(req, res, next) {
-	const deviceCol = db.collection("devices");	
-	let filter= {};
+	const deviceCol = db.collection("devices");		
 
-	const deviceId= req.params.id;
-	// if device ID is provided only delete the corresponding device
-	// otherwise delete all
-	if(deviceId){
-		filter= { "_id": ObjectID(deviceId)};
-	}
+	const deviceId= req.params.id;	
 
-	deviceCol.deleteMany(filter)
+	deviceCol.deleteMany({ "_id": ObjectID(deviceId)})
 	.then(result => {
 		req._socket= {id: deviceId};
+		req._res= { response: {deletedCount: result.deletedCount},  message: "delete device successful", error: null };
+		next();
+	})
+	.catch(next);	
+}
+
+function deleteAllDevices(req, res, next){
+	const deviceCol = db.collection("devices");	
+	deviceCol.deleteMany({})
+	.then(result => {
+		req._socket= {};
 		req._res= { response: {deletedCount: result.deletedCount},  message: "delete device successful", error: null };
 		next();
 	})

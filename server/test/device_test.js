@@ -117,7 +117,7 @@ describe("PUT: /device", function() {
 	it("Should update an existing device", function() {
 		return request
 		.put("/api/v1/device")
-		.send({deviceId: deviceId,  title: "device_update", sensors: {fuel: 90, engine: "ON"}})
+		.send({id: deviceId,  title: "device_update", sensors: {fuel: 90, engine: "ON"}})
 		.then(function(res) { 
 			expect(res.statusCode).to.equal(200); 
 			expect(res.body).to.be.an("object"); 
@@ -153,8 +153,7 @@ describe("GET: /device", function() {
 describe("DELETE: /device", function() {
 	it("Should delete an existing device", function() {
 		return request
-		.delete("/api/v1/device")
-		.send({deviceId: deviceId})
+		.delete("/api/v1/device/"+deviceId)		
 		.then(function(res) { 
 			console.log("test:", res.body);
 			expect(res.statusCode).to.equal(200); 
