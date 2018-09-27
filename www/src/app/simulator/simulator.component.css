@@ -8,8 +8,8 @@
 }
 
 .device-list {
-    position: relative;
+    position: absolute;
     left: 300px;
-    
+    width: 80%;
 }
 

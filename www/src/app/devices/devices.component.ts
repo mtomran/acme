@@ -9,12 +9,16 @@ import { DeviceService } from '../device.service';
 })
 export class DevicesComponent implements OnInit {
   // device inforamtion is stored in an object map for quicker reference
-  constructor(private deviceService: DeviceService) { }
+  displayedColumns: string[] = ['id', 'title', 'type', 'sensors'];
 
-  devicesById;
+  constructor(private deviceService: DeviceService) { }
 
   get Devices(): DeviceMap {
     return this.deviceService.Devices;
+  }
+
+  get DevicesArray(): Device[] {
+    return Object.values(this.Devices);
   }
 
   ngOnInit() {
@@ -23,5 +27,6 @@ export class DevicesComponent implements OnInit {
 
     // intialize sockets to update device list upon events
     this.deviceService.initSockets();
+
   }
 }

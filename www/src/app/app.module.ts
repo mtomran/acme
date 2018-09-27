@@ -10,7 +10,9 @@ import { MatButtonModule,
   MatSelectModule,
   MatInputModule,
   MatChipsModule,
-  MatIconModule
+  MatIconModule,
+  MatPaginatorModule,
+  MatTableModule
 } from '@angular/material';
 import { DevicesComponent } from './devices/devices.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +29,15 @@ import { SimulatorComponent } from './simulator/simulator.component';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    MatButtonModule, MatListModule, MatFormFieldModule, MatSelectModule, MatInputModule, MatChipsModule, MatIconModule,
+    MatButtonModule,
+    MatListModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatChipsModule,
+    MatIconModule,
+    MatPaginatorModule,
+    MatTableModule,
     AppRoutingModule
   ],
   providers: [],

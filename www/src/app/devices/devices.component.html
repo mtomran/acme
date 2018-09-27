@@ -1,7 +1,39 @@
 <h2>Devices</h2>
-
-<mat-list dense>
-  <mat-list-item *ngFor="let device of Devices | keyvalue"> 
-    {{device.value.id}} {{device.value.title}} {{device.value.type}} {{device.value.sensors | json}}
-  </mat-list-item>
- </mat-list>
+ <div class="mat-elevation-z8">
+    <table mat-table [dataSource]="DevicesArray">
+  
+      <!-- ID Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+  
+      <!-- Title Column -->
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef> Title </th>
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+      </ng-container>
+  
+      <!-- Type Column -->
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> Type </th>
+        <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+      </ng-container>
+  
+      <!-- Sensors Column -->
+      <ng-container matColumnDef="sensors">
+        <th mat-header-cell *matHeaderCellDef> Sensors </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-chip-list>
+            <mat-chip *ngFor="let sensor of element.sensors | keyvalue">
+              <label>{{sensor.key}}: &nbsp; </label> {{sensor.value}}
+            </mat-chip>
+          </mat-chip-list>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+  </div>

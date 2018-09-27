@@ -112,7 +112,7 @@ export class DeviceService {
       console.log('Socket: put device', data);
       const device = this.devicesById[data.id];
       device.title = data.title || device.title;
-      device.title = data.type || device.type;
+      device.type = data.type || device.type;
       device.sensors = data.sensors || device.sensors;
     });
 

@@ -1,13 +1,12 @@
 version: '3'
 services:
   server:
-    command: nodemon -L --exec npm start
     build: ./server
     volumes:
       - ./server:/usr/src/app
       - /usr/src/app/node_modules
     depends_on: 
-      - db
+      - db    
     restart: unless-stopped
   
   db:

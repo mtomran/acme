@@ -3,52 +3,54 @@
     Device Simulator
   </h2>
 
-  <div  class="simulator-left-panel">
-    <div>
-      <mat-form-field>
-        <input matInput placeholder="device name" [(ngModel)]="deviceTitle">
-      </mat-form-field>
+  <div class="simulator-left-panel">
 
-      <mat-form-field>
-        <mat-select placeholder="select device type" [(ngModel)]="deviceType">
-            <mat-option value="car">car</mat-option>
-            <mat-option value="stove">stove</mat-option>
-            <mat-option value="fridge">fridge</mat-option>
-        </mat-select>
-      </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="device name" [(ngModel)]="deviceTitle">
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let sensor of sensors | keyvalue" [selectable]="selectable"
-                    [removable]="removable" (removed)="removeSensor(sensor.key)">
-            {{sensor.key}}
-            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-          </mat-chip>
-          <input placeholder="New sensor..."
-                  [matChipInputFor]="chipList"
-                  [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                  [matChipInputAddOnBlur]="addOnBlur"
-                  (matChipInputTokenEnd)="addSensor($event)">
-        </mat-chip-list>
-      </mat-form-field>
+    <mat-form-field>
+      <mat-select placeholder="select device type" [(ngModel)]="deviceType">
+        <mat-option value="car">car</mat-option>
+        <mat-option value="stove">stove</mat-option>
+        <mat-option value="fridge">fridge</mat-option>
+      </mat-select>
+    </mat-form-field>
 
-      <button mat-button *ngIf="!deviceId" (click)="addDeviceClick()">Add Device</button>
-      <div *ngIf="deviceId">
-        <button mat-button (click)="updateDeviceClick()">Update Device</button>
-        <button mat-button (click)="deleteDeviceClick()">Delete Device</button>  
-      </div>
+    <mat-form-field>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let sensor of deviceSensors | keyvalue" [selectable]="selectable" [removable]="removable" (removed)="removeSensor(sensor.key)">
+          {{sensor.key}}
+          <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="add new sensor..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+          [matChipInputAddOnBlur]="addOnBlur" (matChipInputTokenEnd)="addSensor($event)">
+      </mat-chip-list>
+    </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="select device" [(ngModel)]="deviceId" (ngModelChange)="deviceSelectChange()" >
-            <mat-option *ngFor="let device of Devices | keyvalue" value="{{device.value.id}}">{{device.value.title}}</mat-option>            
-        </mat-select>
-      </mat-form-field>
+    <mat-form-field *ngFor="let sensor of getSensorKeys()">
+      <input matInput placeholder="{{sensor}} value" [(ngModel)]="deviceSensors[sensor]">
+    </mat-form-field>
 
-      <button mat-button (click)="resetDeviceClick()">Reset</button>
-           
+
+    <button mat-button *ngIf="!deviceId" (click)="addDeviceClick()">Add Device</button>
+    <div *ngIf="deviceId">
+      <button mat-button (click)="updateDeviceClick()">Update Device</button>
+      <button mat-button (click)="deleteDeviceClick()">Delete Device</button>
     </div>
-    
-  </div> <!-- left panel -->
+
+    <br/>
+
+    <mat-form-field>
+      <mat-select placeholder="select a device to update/delete" [(ngModel)]="deviceId" (ngModelChange)="deviceSelectChange()">
+        <mat-option *ngFor="let device of Devices | keyvalue" value="{{device.value.id}}">{{device.value.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-button (click)="resetDeviceClick()">Reset</button>
+
+  </div>
+  <!-- left panel -->
   <div class="device-list">
     <app-devices></app-devices>
   </div>

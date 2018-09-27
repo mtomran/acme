@@ -3,6 +3,7 @@ import { MatChipInputEvent } from '@angular/material';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Device, Sensor, DeviceMap } from '../device';
 import { DeviceService } from '../device.service';
+import * as _ from 'lodash';
 
 @Component({
   selector: 'app-simulator',
@@ -21,7 +22,7 @@ export class SimulatorComponent implements OnInit {
   deviceId: string;
   deviceTitle: string;
   deviceType: string;
-  sensors: Sensor = {};
+  deviceSensors: Sensor = {};
 
   ngOnInit() {
   }
@@ -36,7 +37,7 @@ export class SimulatorComponent implements OnInit {
 
     // Add sensor
     if ((value || '').trim()) {
-      this.sensors[value.trim()] = '';
+      this.deviceSensors[value.trim()] = '';
     }
 
     // Reset the input value
@@ -46,7 +47,7 @@ export class SimulatorComponent implements OnInit {
   }
 
   removeSensor(sensor: string): void {
-    delete this.sensors[sensor];
+    delete this.deviceSensors[sensor];
   }
 
   addDeviceClick() {
@@ -54,7 +55,7 @@ export class SimulatorComponent implements OnInit {
       id: null,
       title: this.deviceTitle,
       type: this.deviceType,
-      sensors: this.sensors
+      sensors: this.deviceSensors
     };
 
     this.postDevice(device);
@@ -72,7 +73,7 @@ export class SimulatorComponent implements OnInit {
       id: this.deviceId,
       title: this.deviceTitle,
       type: this.deviceType,
-      sensors: this.sensors
+      sensors: this.deviceSensors
     };
 
     this.putDevice(device);
@@ -89,6 +90,7 @@ export class SimulatorComponent implements OnInit {
     const deviceId = this.deviceId;
 
     this.deleteDevice(deviceId);
+    this.resetDevice();
   }
 
   deleteDevice(deviceId: string): void {
@@ -98,23 +100,32 @@ export class SimulatorComponent implements OnInit {
     });
   }
 
+  /**
+   * loads a device info to form fields when device dropdown selection changes
+   * so it can be updated or deleted
+   */
   deviceSelectChange(): void {
-    console.log('deviceSelectChange', this.deviceId);
-    if ( !this.deviceId ) {
-      return;
-    }
+    // cloning the exiting data so angular two way binding
+    // does not change the data while updating the form fields.
+    const device = _.cloneDeep(this.Devices[this.deviceId]);
 
-    const device = this.Devices[this.deviceId];
-    console.log('deviceSelectChange', this.deviceId);
     this.deviceTitle = device.title;
     this.deviceType = device.type;
-    this.sensors = device.sensors;
+    this.deviceSensors = device.sensors;
   }
 
   resetDeviceClick(): void {
+    this.resetDevice();
+  }
+
+  resetDevice(): void {
     this.deviceId = '';
     this.deviceTitle = '';
     this.deviceType = '';
-    this.sensors = {};
+    this.deviceSensors = {};
+  }
+
+  getSensorKeys(): Array<string> {
+    return Object.keys(this.deviceSensors);
   }
 }
