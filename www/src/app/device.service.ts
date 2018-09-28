@@ -121,11 +121,17 @@ export class DeviceService {
     .subscribe(data => {
       console.log('Socket: delete device', data);
 
-      if (data.id) {// delete one item if ID is provided
-        delete this.devicesById[data.id];
-      } else {// delete all items if ID is not provided
-        this.devicesById = {};
-      }
+      // delete the device record
+       delete this.devicesById[data.id];
+    });
+
+    // socket event for deleting all exiting devices
+    this.socketService.onEvent('delete:/device')
+    .subscribe(data => {
+      console.log('Socket: delete all devices', data);
+
+      // delete all devices
+      this.devicesById = {};
     });
   }
 }

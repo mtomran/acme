@@ -1,9 +1,9 @@
 # ACME Cloud Platform
 ACME is a cloud platform that allows intelligent devices such as cars, thermostats, home appliances, and industrial machines to interconnect in the cloud. This application is a subset of ACME application that stores device state in the cloud and provides a REST API to perform CRUD operations on the stored data.
-It also provides a GUI to view device info/state and a simulate device info/state changes.
+It also provides a GUI to view device info/state and a simulator to manipulate device info/state.
 
 ## Installation
-### prerequisites:
+### Prerequisites:
 - docker
 - docker-compose (for installation instruction visit [here](https://docs.docker.com/compose/install))
 
@@ -17,10 +17,10 @@ It also provides a GUI to view device info/state and a simulate device info/stat
 ## How to use
 Navigate to http://localhost:8080 in a web-browser to view the landing page.
 
-From the landing page, press `Devices` to view the list of devices or press Simulator to view the device manipulation page where you can add, edit, delete, and view devices.
+From the landing page, press `Devices` to view the list of devices or press `Simulator` to view the device manipulation page where you can add, edit, delete, and view devices.
 
 ## Services
-The application is comprised of 4 services
+The application is comprised of 4 services:
 1. [www](www/README.md): Front-End logic of the application using Angular v6 and Angular-CLI.
 
 2. [server](server/README.md): Back-End logic of the application using Node.js.
