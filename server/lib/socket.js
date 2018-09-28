@@ -39,7 +39,7 @@ module.exports = function (server) {
 
 	io.sockets
 	.on("connection", (socket) => {
-		console.log("Socket connected", socket);		
+		console.log("Socket connected. ID:", socket.id);		
 	});
 };
 

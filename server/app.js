@@ -30,6 +30,9 @@ app.get("/api/v1", (req, res) => {
 
 app.use("/api/v1", require("./routes"));
 
+
+app.use("/api/v1/apidoc", express.static(__dirname + "/../apidoc"));
+
 // Use connect method to connect to the server
 MongoClient.connect("mongodb://root:secret@db:27017", function (err, client) {
 	if(err) throw new Error(err);

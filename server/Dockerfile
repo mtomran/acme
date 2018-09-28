@@ -1,6 +1,6 @@
 FROM node:8.12.0
 
-RUN npm install -g nodemon
+RUN npm install -g nodemon apidoc
 
 WORKDIR /usr/src/app
 
@@ -9,6 +9,8 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+
+RUN ./run.sh
 
 ## script to wait for other services to start
 ADD https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh /wait-for-it.sh

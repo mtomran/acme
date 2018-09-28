@@ -3,14 +3,81 @@ const express = require("express");
 const router = express.Router();
 const socketHandler= require("../lib/socket").socketHandler;
 
+/**
+ * @api	{get} /device get all devices
+ * @apiName 		GetDevice
+ * @apiGroup 		device
+ * @apiDescription	Gets all devices information stored in the DB
+ *
+ * @apiSuccess	{[Object]} response array of device objects
+ * @apiSuccess	{String} response.id device ID
+ * @apiSuccess	{String} response.title device title
+ * @apiSuccess	{String} response.type device type
+ * @apiSuccess	{Object} response.sensors device sensors json object
+ * @apiSuccess  {String} message human readable message
+ * @apiSuccess  {String} error error type, null if no error
+ */
 router.get("/device", getDevice, utils.responseHandler);
 
+
+/**
+ * @api	{post} /device add new device
+ * @apiName 		PostDevice
+ * @apiGroup 		device
+ * @apiDescription	inserts a new device into the DB
+ *
+ * @apiParam  {String} title device title
+ * @apiParam  {String} type device type
+ * @apiParam  {Object} sensors device sensors json object
+ * @apiSuccess  {Object} response device update response object
+ * @apiSuccess	{String} response.id device ID
+ * @apiSuccess  {String} message human readable message
+ * @apiSuccess  {String} error error type, null if no error
+ */
 router.post("/device", postDevice, socketHandler(), utils.responseHandler);
 
+/**
+ * @api	{put} /device update an existing device
+ * @apiName 		PutDevice
+ * @apiGroup 		device
+ * @apiDescription	updates an existing device in the DB
+ *
+ * @apiParam  {String} id device ID
+ * @apiParam  {String} title device title
+ * @apiParam  {String} type device type
+ * @apiParam  {Object} sensors device sensors json object
+ * @apiSuccess  {Object} response device update response object
+ * @apiSuccess	{Number} response.modifiedCount number of records modified
+ * @apiSuccess  {String} message human readable message
+ * @apiSuccess  {String} error error type, null if no error
+ */
 router.put("/device", putDevice, socketHandler(), utils.responseHandler);
 
+/**
+ * @api	{delete} /device/:id delete a device
+ * @apiName 		DeleteDevice
+ * @apiGroup 		device
+ * @apiDescription	deletes a device information stored in the DB
+ *
+ * @apiParam  {String} id device ID
+ * @apiSuccess	{[Object]} response object for device delete
+ * @apiSuccess	{Number} response.deletedCount number of records deleted
+ * @apiSuccess  {String} message human readable message
+ * @apiSuccess  {String} error error type, null if no error
+ */
 router.delete("/device/:id", deleteDevice, socketHandler(), utils.responseHandler);
 
+/**
+ * @api	{delete} /device delete all devices
+ * @apiName 		DeleteAllDevices
+ * @apiGroup 		device
+ * @apiDescription	deletes all devices information stored in the DB
+ *
+ * @apiSuccess	{[Object]} response object for device delete
+ * @apiSuccess	{Number} response.deletedCount number of records deleted
+ * @apiSuccess  {String} message human readable message
+ * @apiSuccess  {String} error error type, null if no error
+ */
 router.delete("/device", deleteAllDevices, socketHandler(), utils.responseHandler);
 
 const ObjectID = require("mongodb").ObjectID;
