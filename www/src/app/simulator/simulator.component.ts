@@ -19,6 +19,7 @@ export class SimulatorComponent implements OnInit {
   removable = true;
   addOnBlur = true;
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
+
   deviceId: string;
   deviceTitle: string;
   deviceType: string;
@@ -27,10 +28,17 @@ export class SimulatorComponent implements OnInit {
   ngOnInit() {
   }
 
+  /**
+   * gets device map from the service
+   */
   get Devices(): DeviceMap {
     return this.deviceService.Devices;
   }
 
+  /**
+   * adds a new sensor to the sensor map
+   * @param event add material chip item event
+   */
   addSensor(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -46,10 +54,14 @@ export class SimulatorComponent implements OnInit {
     }
   }
 
+  // deletes a sensor when cross button is clicked
   removeSensor(sensor: string): void {
     delete this.deviceSensors[sensor];
   }
 
+  /**
+   * on click event of the 'Add Device' button
+   */
   addDeviceClick() {
     const device: Device = {
       id: null,
@@ -61,6 +73,10 @@ export class SimulatorComponent implements OnInit {
     this.postDevice(device);
   }
 
+  /**
+   * call to device service to add a new device
+   * @param device device object
+   */
   postDevice(device: Device): void {
     this.deviceService.postDevice(device)
     .subscribe(res => {
@@ -68,6 +84,9 @@ export class SimulatorComponent implements OnInit {
     });
   }
 
+  /**
+   * on click event of the 'Update Device' button
+   */
   updateDeviceClick() {
     const device: Device = {
       id: this.deviceId,
@@ -79,6 +98,10 @@ export class SimulatorComponent implements OnInit {
     this.putDevice(device);
   }
 
+  /**
+   * call to device service to update the device
+   * @param device device object
+   */
   putDevice(device: Device): void {
     this.deviceService.putDevice(device)
     .subscribe(res => {
@@ -86,13 +109,22 @@ export class SimulatorComponent implements OnInit {
     });
   }
 
+  /**
+   * on click event for the 'Delete Device' button
+   */
   deleteDeviceClick() {
     const deviceId = this.deviceId;
 
     this.deleteDevice(deviceId);
+
+    // clear the form fields after deleting
     this.resetDevice();
   }
 
+  /**
+   * call to device service to remove the device
+   * @param deviceId ID of the device to be removed
+   */
   deleteDevice(deviceId: string): void {
     this.deviceService.deleteDevice(deviceId)
     .subscribe(res => {
@@ -114,10 +146,16 @@ export class SimulatorComponent implements OnInit {
     this.deviceSensors = device.sensors;
   }
 
+  /**
+   * on click event for the 'Reset' button
+   */
   resetDeviceClick(): void {
     this.resetDevice();
   }
 
+  /**
+   * resets the variables holding form field values
+   */
   resetDevice(): void {
     this.deviceId = '';
     this.deviceTitle = '';
@@ -125,6 +163,10 @@ export class SimulatorComponent implements OnInit {
     this.deviceSensors = {};
   }
 
+  /**
+   * gets the array of all sensor keys
+   * @return [ Array[string] ] array of keys in sensor map
+   */
   getSensorKeys(): Array<string> {
     return Object.keys(this.deviceSensors);
   }

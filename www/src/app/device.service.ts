@@ -10,11 +10,21 @@ import { SocketService } from './socket.service';
 })
 
 export class DeviceService {
-  constructor(private http: HttpClient, private socketService: SocketService) { }
+  constructor(private http: HttpClient, private socketService: SocketService) {
+    // gets initial list of devices
+    this.loadDevices();
+
+    // initialize sockets to update device list upon events
+    this.initSockets();
+  }
 
   private deviceUrl = 'server/device';
+
+  // stores the device map using id as key
+  // device information is stored in an object map for quicker reference
   private devicesById: DeviceMap = {};
 
+  // returns the device map
   get Devices(): DeviceMap {
     return this.devicesById;
   }
@@ -24,8 +34,7 @@ export class DeviceService {
   }
 
   /**
-   * gets the list of devices
-   * @return [ Device[] ] device array
+   * loads the list of devices using http call
    */
   loadDevices() {
     this.loadDevicesHttp()
@@ -37,6 +46,9 @@ export class DeviceService {
     });
   }
 
+  /**
+   * http call to get the device list
+   */
   loadDevicesHttp(): Observable<Device[]> {
     return this.http.get<DeviceGetResponse>(this.deviceUrl)
     .pipe(map(res => {
@@ -80,7 +92,7 @@ export class DeviceService {
   /**
    * device delete service
    * @param deviceID device ID to be deleted
-   * @return [ Device ] updated device
+   * @return [ string ] deleted device ID
    */
   deleteDevice(deviceId: string): Observable<string> {
     return this.http.delete<DeviceResponse>(this.deviceUrl + '/' + deviceId).pipe(map(res => {
@@ -89,7 +101,7 @@ export class DeviceService {
   }
 
   /**
-   * intialize sockets to update device list upon events
+   * initialize sockets to update device list upon events
    */
   initSockets() {
     // socket event for adding a new device

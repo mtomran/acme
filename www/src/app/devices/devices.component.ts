@@ -7,26 +7,22 @@ import { DeviceService } from '../device.service';
   templateUrl: './devices.component.html',
   styleUrls: ['./devices.component.css']
 })
+
 export class DevicesComponent implements OnInit {
-  // device inforamtion is stored in an object map for quicker reference
+  // table columns array
   displayedColumns: string[] = ['id', 'title', 'type', 'sensors'];
 
   constructor(private deviceService: DeviceService) { }
 
+  // gets devices stored in the service
   get Devices(): DeviceMap {
     return this.deviceService.Devices;
   }
 
+  // devices array for the table data source
   get DevicesArray(): Device[] {
     return Object.values(this.Devices);
   }
 
-  ngOnInit() {
-    // gets initial list of devices
-    this.deviceService.loadDevices();
-
-    // intialize sockets to update device list upon events
-    this.deviceService.initSockets();
-
-  }
+  ngOnInit() {}
 }

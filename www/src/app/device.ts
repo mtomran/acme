@@ -12,7 +12,7 @@ export interface DeviceResponse {
   error: string;
 }
 
-// device structure used in the component
+// device structure type
 export interface Device {
   id: string;
   title: string;
@@ -20,10 +20,12 @@ export interface Device {
   sensors: Sensor;
 }
 
+// key/value presentation of the device array using id as key
 export interface DeviceMap {
   [key: string]: Device;
 }
 
+// device sensor key/value type
 export interface Sensor {
   [key: string]: any;
 }

@@ -6,12 +6,13 @@ import * as io from 'socket.io-client';
 @Injectable({
   providedIn: 'root'
 })
+
 export class SocketService {
-  // @ts-ignore : module exists
   private socket: SocketIOClient.Socket;
 
   constructor() {
     this.socket = io.connect();
+
     this.socket.on('connect', () => {
         console.log('Socket: Connected');
     });
@@ -21,9 +22,13 @@ export class SocketService {
     });
   }
 
-  // HANDLER
+  /**
+   * returns Observable of socket events
+   * @param event socket event name
+   */
   onEvent(event) {
     return Observable.create(observer => {
+      console.log(`Socket: Event listener '${event}' created.`);
       this.socket.on(event, data => {
         observer.next(data);
       });
