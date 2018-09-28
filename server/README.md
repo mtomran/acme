@@ -5,8 +5,11 @@ ACME REST API is a [Node.js](https://nodejs.org/) and [Express](http://expressjs
 The ACME REST API can be used be calling available end-points.
 To see full documentation of the API visit http://localhost:8080/server/apidoc/index.html.
 
+## Web-Socket
+The back-end server uses, web-socket protocol ( used by [socket.io](https://socket.io/) package) to notify all connected clients of changes in device data.
+
 ## Tests
-To run tests make sure docker containers are running and run 
+To run tests make sure docker containers are running. Then run 
 
     docker-compose exec server npm test
 

@@ -101,8 +101,7 @@ function getDevice(req, res, next) {
 		req._res= { response: result,  message: "get device successful", error: null };
 		next();
 	})
-	.catch(next);
-	
+	.catch(next);	
 }
 
 /**
@@ -150,7 +149,7 @@ function putDevice(req, res, next) {
 }
 
 /**
- * deletes all or one device(s)
+ * deletes one device
  * @param {Object} req express request object
  * @param {Object} res express respnse object
  * @param {Object} next calls next available middleware
@@ -169,6 +168,12 @@ function deleteDevice(req, res, next) {
 	.catch(next);	
 }
 
+/**
+ * deletes all devices
+ * @param {Object} req express request object
+ * @param {Object} res express respnse object
+ * @param {Object} next calls next available middleware
+ */
 function deleteAllDevices(req, res, next){
 	const deviceCol = db.collection("devices");	
 	deviceCol.deleteMany({})
