@@ -1,5 +1,13 @@
 version: '3'
 services:
+  # front-end service
+  www:
+    build: ./www
+    volumes:
+      - ./www:/usr/src/app     
+    restart: unless-stopped  
+
+  # back-end service
   server:
     build: ./server
     volumes:
@@ -9,6 +17,7 @@ services:
       - db    
     restart: unless-stopped
   
+  # MongoDb
   db:
     build: ./db
     environment:
@@ -16,16 +25,11 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: secret
     restart: unless-stopped
   
-  www:
-    build: ./www
-    volumes:
-      - ./www:/usr/src/app     
-    restart: unless-stopped
-  
+  # NGINX proxy
   proxy:
     build: ./proxy
     ports: 
-      - "80:80"
+      - "8080:80"
     depends_on: 
       - www
       - server  
