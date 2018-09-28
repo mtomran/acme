@@ -11,7 +11,6 @@ import { MatButtonModule,
   MatInputModule,
   MatChipsModule,
   MatIconModule,
-  MatPaginatorModule,
   MatTableModule
 } from '@angular/material';
 import { DevicesComponent } from './devices/devices.component';
@@ -36,7 +35,6 @@ import { SimulatorComponent } from './simulator/simulator.component';
     MatInputModule,
     MatChipsModule,
     MatIconModule,
-    MatPaginatorModule,
     MatTableModule,
     AppRoutingModule
   ],
