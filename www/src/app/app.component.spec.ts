@@ -27,4 +27,12 @@ describe('AppComponent', () => {
     const compiled = fixture.debugElement.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain('Welcome to ACME');
   }));
+
+  it('should show links to redirect to Devices and Simulator routes', async(() => {
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    const compiled = fixture.debugElement.nativeElement;
+    expect(compiled.querySelector('a.devices').textContent).toContain('Devices');
+    expect(compiled.querySelector('a.simulator').textContent).toContain('Simulator');
+  }));
 });

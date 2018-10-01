@@ -1,17 +1,17 @@
 <div class="device-simulator-container">
   <h2>
-    Device Simulator
+    {{heading}}
   </h2>
 
   <div class="simulator-left-panel">
 
     <mat-form-field>
-      <input matInput placeholder="device name" [(ngModel)]="deviceTitle">
+      <input matInput class="device-title" placeholder="device name" [(ngModel)]="deviceTitle">
     </mat-form-field>
 
     <mat-form-field>
-      <mat-select placeholder="select device type" [(ngModel)]="deviceType">
-        <mat-option value="car">car</mat-option>
+      <mat-select class="device-type" placeholder="select device type" [(ngModel)]="deviceType">
+        <mat-option class="device-type-car" value="car">car</mat-option>
         <mat-option value="stove">stove</mat-option>
         <mat-option value="fridge">fridge</mat-option>
       </mat-select>

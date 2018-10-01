@@ -10,6 +10,7 @@ import { DeviceService } from '../device.service';
 
 export class DevicesComponent implements OnInit {
   // table columns array
+  heading = 'Devices';
   displayedColumns: string[] = ['id', 'title', 'type', 'sensors'];
 
   constructor(private deviceService: DeviceService) { }

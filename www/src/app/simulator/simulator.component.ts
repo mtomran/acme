@@ -14,6 +14,7 @@ export class SimulatorComponent implements OnInit {
 
   constructor(private deviceService: DeviceService) { }
 
+  heading = 'Device Simulator';
   visible = true;
   selectable = true;
   removable = true;
